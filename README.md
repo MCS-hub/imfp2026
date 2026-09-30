@@ -1,4 +1,6 @@
-# Budgeted CLIP-Guided ImageNet Sampling
+
+
+#CLIP-Guided ImageNet Sampling
 
 This repository reproduces class-conditional $256x256$ ImageNet experiments
 with frozen iMF and SiT transports, a frozen CLIP reward, and sequential
