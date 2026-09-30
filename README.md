@@ -1,11 +1,12 @@
-# Synthetic experiments: posterior sampling with few-step transports
+# Branches
 
-This repository contains the synthetic posterior-sampling experiments and the
-2D banana loss-to-map-error experiment accompanying the manuscript. All datasets
-and numerical posterior references are generated locally; no external datasets
-or pretrained models are required. Run the commands below from the repository
-root in an activated Python environment. The cluster-specific shell scripts are
-not needed.
+This repo consists of two braches:
+
+- Branch main: synthetic posterior-sampling experiments
+- Branch image: CLIP-guided Imagenet experiments
+
+
+# Synthetic experiments (this brach)
 
 ## 1. Environment
 
@@ -17,17 +18,15 @@ remaining dependencies with:
 python -m pip install -r requirements.txt
 ```
 
-The dependencies are PyTorch, NumPy, SciPy, and Matplotlib. `torchdiffeq` is
-optional and is not needed for the reported experiments, which use fixed-step
-RK4 for flow matching. The recorded 2D run used PyTorch 2.9.1 with ROCm 6.4 and
-NumPy 2.2.6 on an AMD Instinct MI250X.
-
-Both experiment drivers select an available GPU automatically, otherwise CPU.
 Use `--device cpu` to force CPU or `--device cuda` to require a GPU. PyTorch uses
 the device name `cuda` for both CUDA and ROCm builds. A GPU is recommended for the
-full posterior-sampling comparison. Figures are generated without a display.
+full posterior-sampling comparison.
 
-## 2. Main posterior-sampling experiments
+## 2. Prior pretrained checkpoints
+
+Those checkpoints are given in folder 'checkpoints'
+
+## 3. Main posterior-sampling experiments
 
 Run the banana experiment:
 
@@ -50,43 +49,6 @@ python -u end_to_end_comparison.py \
   --checkpoint-dir checkpoints \
   --outdir outs/sine
 ```
-
-The explicit `--dim 32` is important: the driver's general-purpose default is 64.
-Each command trains the prior models if compatible checkpoints are unavailable,
-evaluates prior quality, constructs a numerical posterior reference, and runs:
-
-| Code identifier | Method |
-| --- | --- |
-| `imf_spt_pcn` | iMF transport with SPT and pCN updates |
-| `imf_spt_hybrid` | iMF transport with SPT, hot-level pCN, and cold-level split HMC |
-| `fm_spt_pcn` | Flow-matching transport with SPT and pCN updates |
-| `diffusion_dps` | Diffusion posterior sampling (DPS) |
-
-The commands use the manuscript settings through the following defaults:
-
-| Setting | Value |
-| --- | --- |
-| Prior training dataset | 20,000 samples per scenario |
-| Training | 16,000 updates; batch size up to 512; learning rate 0.001 |
-| Network | Four hidden SiLU layers of width 512 |
-| Training-data seed | 1701 |
-| Observation noise standard deviation | 0.2 |
-| Observation operator | `G(x1, x2) = x2 + 0.35*x1` in each block |
-| Fixed observations | First two blocks: 2; remaining blocks: -1 |
-| Banana / sine transverse standard deviation | 0.30 / 0.15 |
-| iMF generation | Six steps |
-| FM generation | 100 RK4 steps, or 400 network evaluations per map |
-| SPT | Ten ladders, each with 24 inverse temperatures |
-| Adaptation / additional burn-in | 500 / 500 sweeps |
-| Retained samples | 600 per ladder, without thinning: 6,000 per method and seed |
-| Cold-level split HMC | Six integration steps; initial step size 0.05 |
-| DPS | 1,000 diffusion steps; residual-norm guidance scale 0.3 |
-| Sampler seeds | 0, 1, 2, 3 |
-
-Prior models are fixed across sampler seeds. The reported standard deviations
-therefore describe sampler-seed variability, conditional on the fitted models.
-The 6,000 retained samples exclude adaptation and burn-in; reported sampling
-runtime includes these phases, initialization, swaps, and final transport.
 
 ### Expected outputs
 
@@ -129,7 +91,7 @@ training configuration while reusing incompatible checkpoints raises an error.
 For an independent reproduction, use fresh checkpoint and output directories.
 The main driver can overwrite existing output files.
 
-## 3. Two-dimensional loss-to-map-error experiment
+## 4. Two-dimensional loss-to-map-error experiment
 
 Run the experiment supporting the loss-to-map-error result:
 
@@ -188,10 +150,9 @@ python banana_map_error_2d.py \
 
 Plot regeneration replaces the figures but preserves metrics and model files.
 
-## 4. Quick execution checks
+## 5. Quick execution checks
 
-These reduced runs check execution only; they do not reproduce the manuscript's
-numerical results. Use separate checkpoint and output directories for them.
+These reduced runs check execution only. Use separate checkpoint and output directories for them.
 
 ```bash
 python -u end_to_end_comparison.py \
@@ -218,20 +179,3 @@ python end_to_end_comparison.py --help
 python banana_map_error_2d.py --help
 ```
 
-Random seeds and resolved settings are recorded with the results. Numerical
-results need not match bit-for-bit across different hardware or library versions.
-
-## 5. Source files
-
-Keep these files together for the main benchmark:
-
-- `end_to_end_comparison.py`: training, sampling, and evaluation driver.
-- `curved_problem.py`: priors, observation models, and posterior references.
-- `learned_models.py`: iMF, FM, and diffusion models and DPS sampling.
-- `spt_score.py`: pCN, split-HMC, and parallel-tempering implementations.
-- `evaluation.py`: metrics, plots, and reports.
-
-`banana_map_error_2d.py` is standalone and needs only the dependencies above.
-`test_benchmark.py` contains additional benchmark tests. This repository's
-instructions cover the synthetic experiments; they do not run the ImageNet
-experiments.
