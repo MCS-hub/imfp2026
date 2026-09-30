@@ -24,7 +24,7 @@ full posterior-sampling comparison.
 
 ## 2. Prior pretrained checkpoints
 
-Those checkpoints are given in folder 'checkpoints'
+Those checkpoints (for dimension 32) are given in folder `checkpoints`.
 
 ## 3. Main posterior-sampling experiments
 
