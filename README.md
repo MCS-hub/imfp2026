@@ -5,9 +5,6 @@ This repo consists of two braches:
 - Branch main (this brach): synthetic posterior-sampling experiments
 - Branch image: CLIP-guided Imagenet experiments (https://github.com/MCS-hub/imfp2026/tree/image)
 
-# AI use:
-
-Codex and Copilot Pro+ were used to assisst with the development of this project.
 
 # Inheritance:
 
@@ -84,4 +81,6 @@ python -u banana_map_error_2d.py \
   --outdir outs/map_error_smoke
 ```
 
+# AI use:
 
+Codex and Copilot Pro+ were used to assisst with the development of this project.
