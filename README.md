@@ -7,11 +7,6 @@ This repo consists of two braches:
 
 # CLIP-Guided ImageNet Sampling (this branch)
 
-This repository reproduces class-conditional $256x256$ ImageNet experiments
-with frozen iMF and SiT transports, a frozen CLIP reward, and sequential
-parallel tempering (SPT). The final configurations compare iMF-SPT-pCN,
-iMF-SPT-hybrid, an iMF Best-of-12 prior baseline, and a time-budgeted
-SiT-SPT-pCN baseline.
 
 ## Requirements
 
@@ -26,10 +21,7 @@ The repository includes the required vendor source trees.
 
 ## Downloading checkpoints
 
-Model weights are not included in the submission. From the repository root,
-download the two checkpoints below (approximately 5.2 GB combined). These
-commands pin the source revisions and save the filenames used by the supplied
-configurations:
+Model weights are not included in this repo. From the repository root, download the two checkpoints below. These commands pin the source revisions and save the filenames used by the supplied configurations:
 
 ```bash
 mkdir -p checkpoints
@@ -47,11 +39,7 @@ Sources:
 
 - **iMF-XL/2:** the [upstream iMF checkpoint repository](https://huggingface.co/Lyy0725/iMF).
 - **SiT-XL/2, 256×256:** the [third-party safetensors mirror](https://huggingface.co/sairights/sit-xl-2-256x256-sde-cfg/tree/5a15dccbe5710eb5bc9a0b0f71e6fb3deb31e24e/pretrained_models)
-  used for these experiments. The official download was unavailable when the
-  checkpoint was acquired. Equivalence to the original official weights has
-  not been independently verified; use this exact mirror file to reproduce
-  the experiment. Provenance and validation details are recorded in
-  [the download metadata](checkpoints/SiT-XL-2-256x256.download.json).
+  used for these experiments.
 
 Verify the downloads against the SHA-256 hashes of the experiment checkpoints:
 
@@ -74,8 +62,7 @@ SiT runs last.
 The Stable Diffusion VAE (`stabilityai/sd-vae-ft-mse`) and CLIP
 (`openai/clip-vit-base-patch32`) weights are downloaded automatically from
 Hugging Face on first use unless already cached. Internet access is required
-for those initial downloads; offline runs require a populated Hugging Face
-cache.
+for those initial downloads.
 
 ## Running a final configuration
 
