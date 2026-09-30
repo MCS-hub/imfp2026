@@ -1,0 +1,72 @@
+{
+  "device": "cuda",
+  "outdir": "outs/reward_final_bald_eagle_snow_painting_tau200_r8_l8_v1",
+  "class_id": 22,
+  "class_name": "bald eagle",
+  "methods": [
+    "imf_spt_pcn",
+    "imf_spt_hybrid"
+  ],
+  "sampler_seeds": [
+    0
+  ],
+  "likelihood_batch_size": 1,
+  "examples": 16,
+  "include_prior": false,
+  "time_budget": null,
+  "prior_samples": 64,
+  "finite_difference_check": false,
+  "save_all_samples": true,
+  "save_chain_grids": true,
+  "prompts": [
+    {
+      "id": "snow_painting",
+      "text": "A colorful painting of a bald eagle perched on a pine branch in falling snow."
+    }
+  ],
+  "imf": {
+    "checkpoint": "checkpoints/iMF-XL-2.pth",
+    "architecture": "imfDiT_XL_2",
+    "steps": 1,
+    "omega": 8.0,
+    "guidance_interval": [
+      0.4,
+      0.65
+    ],
+    "vae": "stabilityai/sd-vae-ft-mse",
+    "local_files_only": false,
+    "activation_checkpointing": true
+  },
+  "sit": {
+    "checkpoint": "checkpoints/SiT-XL-2-256x256.safetensors",
+    "steps": 125,
+    "solver": "heun",
+    "cfg_scale": 4.0,
+    "vae": "stabilityai/sd-vae-ft-mse",
+    "local_files_only": false
+  },
+  "spt": {
+    "replicas": 8,
+    "chains": 8,
+    "adapt_sweeps": 250,
+    "burnin_sweeps": 250,
+    "retained_per_chain": 1000,
+    "thin": 1,
+    "temperature_power": 1.0,
+    "betas": null,
+    "hmc_steps": 6,
+    "initial_hmc_epsilon": 0.1,
+    "min_hmc_epsilon": 1e-07,
+    "max_hmc_epsilon": 0.5,
+    "initial_pcn_scale": 0.1,
+    "target_hmc_acceptance": 0.75,
+    "target_pcn_acceptance": 0.3,
+    "log_every": 10
+  },
+  "reward": {
+    "model": "openai/clip-vit-base-patch32",
+    "revision": "main",
+    "local_files_only": false,
+    "strength": 200
+  }
+}

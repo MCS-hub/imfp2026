@@ -1,0 +1,2 @@
+image_id,image_path,class_id
+imagenet_val_000001,/absolute/path/to/imagenet/validation/image_000001.JPEG,207
