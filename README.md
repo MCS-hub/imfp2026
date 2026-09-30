@@ -2,7 +2,7 @@
 
 This repo consists of two braches:
 
-- Branch main: synthetic posterior-sampling experiments
+- Branch main (this brach): synthetic posterior-sampling experiments
 - Branch image: CLIP-guided Imagenet experiments (https://github.com/MCS-hub/imfp2026/tree/image)
 
 
