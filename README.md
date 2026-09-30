@@ -77,16 +77,4 @@ python -u banana_map_error_2d.py \
   --outdir outs/map_error_smoke
 ```
 
-The 2D reference and differentiation checks can also be run independently:
-
-```bash
-python banana_map_error_2d.py --self-test
-```
-
-For all configurable options:
-
-```bash
-python end_to_end_comparison.py --help
-python banana_map_error_2d.py --help
-```
 
