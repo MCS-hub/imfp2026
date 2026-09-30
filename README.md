@@ -1,4 +1,4 @@
-# Branchess
+# Branches
 
 This repo consists of two braches:
 
