@@ -1,6 +1,11 @@
+# Branches
 
+This repo consists of two braches:
 
-#CLIP-Guided ImageNet Sampling
+- Branch main: synthetic posterior-sampling experiments
+- Branch image: CLIP-guided Imagenet experiments
+
+# CLIP-Guided ImageNet Sampling (this branch)
 
 This repository reproduces class-conditional $256x256$ ImageNet experiments
 with frozen iMF and SiT transports, a frozen CLIP reward, and sequential
