@@ -5,9 +5,6 @@ This repo consists of two braches:
 - Branch main: synthetic posterior-sampling experiments (https://github.com/MCS-hub/imfp2026/tree/main)
 - Branch image (this branch): CLIP-guided Imagenet experiments
 
-# AI use:
-
-Codex and Copilot Pro+ were used to assisst with the development of this project.
 
 # Inheritance:
 
@@ -118,3 +115,7 @@ plus one hour for loading, preflight, scoring, and export.
 Experiment outputs record the resolved protocol, checkpoint hashes, timing,
 diagnostics, traces, and rendered samples. Use `--resume` only with an
 unchanged configuration and output directory.
+
+# AI use:
+
+Codex and Copilot Pro+ were used to assisst with the development of this project.
