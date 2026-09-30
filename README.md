@@ -5,6 +5,15 @@ This repo consists of two braches:
 - Branch main: synthetic posterior-sampling experiments (https://github.com/MCS-hub/imfp2026/tree/main)
 - Branch image (this branch): CLIP-guided Imagenet experiments
 
+# AI use:
+
+Codex and Copilot Pro+ were used to assisst with the development of this project.
+
+# Inheritance:
+
+We leverage the code from https://github.com/Lyy-iiis/imeanflow/tree/torch for the ImageNet iMF as well as its pretrained checkpoint.
+
+
 # CLIP-Guided ImageNet Sampling (this branch)
 
 
